@@ -34,4 +34,4 @@ override.tf.json
 terraform.rc
 
 # Ignore the service account key file
-microservice-on-kubernetes-f94905053a36.json
+*.json
