@@ -1,7 +1,7 @@
 resource "google_sql_database_instance" "default" {
   name             = "sampleapp-db"
   database_version = "MYSQL_8_0"
-  region           = "us-central1"
+  region           = "europe-west2"
 
   settings {
     tier = "db-f1-micro"
