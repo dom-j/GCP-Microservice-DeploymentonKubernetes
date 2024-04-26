@@ -38,3 +38,5 @@ spec:
             secretKeyRef:
              name: db-credentials
              key: db_host
+        - name: REDEPLOY
+          value: "true"
