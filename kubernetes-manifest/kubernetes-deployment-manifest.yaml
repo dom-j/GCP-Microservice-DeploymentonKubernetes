@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: sample-app
-        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest02
+        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest03
         ports:
         - containerPort: 8080
         env:
