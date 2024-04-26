@@ -21,9 +21,9 @@ def get_time():
     time = Time()
     db.session.add(time)
     db.session.commit()
-    # Convert the time to GMT+1 timezone
-    gmt_plus_one_time = time.current_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Etc/GMT-1'))
-    return {'time': gmt_plus_one_time}
+    # Convert the time to London timezone
+    london_time = time.current_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Europe/London'))
+    return {'time': london_time}
 
 with app.app_context():
     db.create_all()
