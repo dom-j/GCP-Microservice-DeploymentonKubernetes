@@ -17,3 +17,24 @@ spec:
         image: gcr.io/microservice-on-kubernetes/gcprestfulmicroservicekubernetes:latest
         ports:
         - containerPort: 8080
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: db_user
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: db_pass
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+             name: db-credentials
+             key: db_name
+        - name: DB_HOST
+          valueFrom:
+            secretKeyRef:
+             name: db-credentials
+             key: db_host
