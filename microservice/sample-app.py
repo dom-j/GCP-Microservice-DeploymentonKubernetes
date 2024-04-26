@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import os
+import pytz
 
 app = Flask(__name__)
 user = os.getenv('DB_USER')
@@ -20,7 +21,9 @@ def get_time():
     time = Time()
     db.session.add(time)
     db.session.commit()
-    return {'time': time.current_time}
+    # Convert the time to GMT+1 timezone
+    gmt_plus_one_time = time.current_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Etc/GMT-1'))
+    return {'time': gmt_plus_one_time}
 
 with app.app_context():
     db.create_all()
