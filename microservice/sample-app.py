@@ -14,16 +14,14 @@ db = SQLAlchemy(app)
 
 class Time(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    current_time = db.Column(db.DateTime, default=datetime.utcnow)
+    current_time = db.Column(db.DateTime, default=datetime.now(pytz.timezone('Europe/London')))
 
 @app.route('/')
 def get_time():
     time = Time()
     db.session.add(time)
     db.session.commit()
-    # Convert the time to London timezone
-    london_time = time.current_time.replace(tzinfo=pytz.utc).astimezone(pytz.timezone('Europe/London'))
-    return {'time': london_time}
+    return {'time': time.current_time}
 
 with app.app_context():
     db.create_all()
