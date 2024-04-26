@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 
 class Time(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    current_time = db.Column(db.DateTime, default=datetime.now(pytz.timezone('Europe/London')))
+    current_time = db.Column(db.DateTime, default=lambda: datetime.now(pytz.timezone('Europe/London')))
 
 @app.route('/')
 def get_time():
