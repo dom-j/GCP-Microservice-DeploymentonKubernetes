@@ -50,7 +50,7 @@ spec:
         image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.0
         args:
         - "--structured-logs"
-        - "--port=5432"
+        - "--port=3306"
         - "microservice-on-kubernetes:europe-west2:sampleapp-db"
         securityContext:
           runAsNonRoot: true
