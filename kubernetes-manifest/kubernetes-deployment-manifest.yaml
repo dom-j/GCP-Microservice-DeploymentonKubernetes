@@ -36,11 +36,9 @@ spec:
               key: db_name
         - name: DB_HOST
           valueFrom:
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: db-config
-                  key: db_host
+            configMapKeyRef:
+                name: db-config
+                key: db_host
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
