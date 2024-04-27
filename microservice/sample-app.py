@@ -8,9 +8,9 @@ app = Flask(__name__)
 user = os.getenv('DB_USER')
 password = os.getenv('DB_PASS')
 database = os.getenv('DB_NAME')
-host = os.getenv('DB_HOST')
-port = os.getenv('DB_PORT')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}'
+socket_path = '/cloudsql/microservice-on-kubernetes:europe-west2:sampleapp-db'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{user}:{password}@/{database}?unix_socket={socket_path}'
 db = SQLAlchemy(app)
 
 class Time(db.Model):
