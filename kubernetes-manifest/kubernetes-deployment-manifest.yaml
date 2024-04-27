@@ -15,7 +15,7 @@ spec:
       serviceAccountName: cloud-sql-proxy-sa
       containers:
       - name: sample-app
-        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest05
+        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest06
         ports:
         - containerPort: 8080
         env:
@@ -37,8 +37,8 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-                name: db-config
-                key: db_host
+              name: db-config
+              key: db_host
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
@@ -47,7 +47,7 @@ spec:
         - name: REDEPLOY
           value: "true"
       - name: cloud-sql-proxy
-        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.0
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.11.0
         args:
         - "--structured-logs"
         - "--port=3306"
