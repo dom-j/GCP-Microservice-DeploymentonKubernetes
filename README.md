@@ -13,3 +13,9 @@
 10. Create the GKE cluster
 11. You can store the database user credentials in the Kubernetes secrets
 12. Create and deploy the kubernetes manifest files for the microservice(deployment and service)
+
+
+13. Instead of the Load Balancer use Cloud SQL Auth proxy to connect to the Cloud SQL instance
+   Creating the CLoud SQL Auth Proxy - I will need
+    A separate service account with Cloud SQL Client role
+    Using Worklof Identity method for connection

@@ -9,7 +9,8 @@ user = os.getenv('DB_USER')
 password = os.getenv('DB_PASS')
 database = os.getenv('DB_NAME')
 host = os.getenv('DB_HOST')
-app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{user}:{password}@{host}/{database}'
+port = os.getenv('DB_PORT')
+app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+mysqlconnector://{user}:{password}@{host}:{port}/{database}'
 db = SQLAlchemy(app)
 
 class Time(db.Model):

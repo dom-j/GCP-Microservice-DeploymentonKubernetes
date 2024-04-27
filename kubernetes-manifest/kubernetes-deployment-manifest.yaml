@@ -12,6 +12,7 @@ spec:
       labels:
         app: sample-app
     spec:
+      serviceAccountName: cloud-sql-proxy-sa
       containers:
       - name: sample-app
         image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest05
@@ -31,12 +32,31 @@ spec:
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
-             name: db-credentials
-             key: db_name
+              name: db-credentials
+              key: db_name
         - name: DB_HOST
           valueFrom:
-            secretKeyRef:
-             name: db-credentials
-             key: db_host
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: db-config
+                  key: db_host
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: db_port
         - name: REDEPLOY
           value: "true"
+      - name: cloud-sql-proxy
+        image: gcr.io/cloud-sql-connectors/cloud-sql-proxy:2.8.0
+        args:
+        - "--structured-logs"
+        - "--port=5432"
+        - "microservice-on-kubernetes:europe-west2:sampleapp-db"
+        securityContext:
+          runAsNonRoot: true
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1"
