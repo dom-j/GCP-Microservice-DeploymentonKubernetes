@@ -15,7 +15,7 @@ spec:
       serviceAccountName: cloud-sql-proxy-sa
       containers:
       - name: sample-app
-        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest07
+        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest08
         ports:
         - containerPort: 8080
         env:
@@ -39,6 +39,10 @@ spec:
         args:
         - "--structured-logs"
         - "--port=3306"
-        - "/cloudsql/microservice-on-kubernetes:europe-west2:sampleapp-db"
+        - "microservice-on-kubernetes:europe-west2:sampleapp-db"
         securityContext:
           runAsNonRoot: true
+        resources:
+         requests:
+          memory: "2Gi"
+          cpu: "1"
