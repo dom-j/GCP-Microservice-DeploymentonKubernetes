@@ -39,6 +39,6 @@ spec:
         args:
         - "--structured-logs"
         - "--port=3306"
-        - "microservice-on-kubernetes:europe-west2:sampleapp-db"
+        - "/cloudsql/microservice-on-kubernetes:europe-west2:sampleapp-db"
         securityContext:
           runAsNonRoot: true
