@@ -15,7 +15,7 @@ spec:
       serviceAccountName: cloud-sql-proxy-sa
       containers:
       - name: sample-app
-        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest06
+        image: europe-west2-docker.pkg.dev/microservice-on-kubernetes/sample-app-repo/gcprestfulmicroservicekubernetes:latest07
         ports:
         - containerPort: 8080
         env:
