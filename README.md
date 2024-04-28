@@ -55,7 +55,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 - Create a new project in GCP
 - Create a service account with the required permissions (e.g. Storage Admin, Kubernetes Engine Admin, Artifact Registry Admin, Service Account User)
-  -Add a key to the service account and download the JSON file 
+  - Add a key to the service account and download the JSON file 
 - Enable the necessary APIs: Cloud SQL Admin API, Kubernetes Engine API, Artifact Registry API, IAM Service Account Credentials API
 - Create the Terraform files: 
     ```
@@ -74,9 +74,16 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 - Build a simple Python Flask microservice (using Terraform) that retrieves the current date/time from a Cloud SQL database
   
-  - **sample-app.py:** Python Flask code for the microservice 
+  - **sample-app.py:** Python Flask code for the microservice
+  - **requirements.txt:** Required Python packages (e.g. Flask, Flask-SQLAlchemy, MySQL-connecttor-python)
 
 ### 4.3. Step 3: Dockerfile and the docker image
+
+- Create an Artifact Registry repository in GCP and push the Docker image to the registry
+
+  - **Dockerfile:** Configuration for building the Docker image
+- Run `docker build -t [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG] .` to build and tag the Docker image
+- Run `docker push [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG]` to push the Docker image to the Artifact Registry
 
 ### 4.4. Step 4: Kubernetes manifest files
 
