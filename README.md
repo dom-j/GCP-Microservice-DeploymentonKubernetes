@@ -68,12 +68,18 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
     ```
 **NOTE:** Make sure to include sensitive information in your gitignore file and do not expose them in the main code or in GitHub.
 
+- Create a Google Kubernetes Engine cluster
+  - **main.tf** - Terraform configuration for creating the GKE cluster
+  
+- - Create an Artifact Registry repository in GCP and push the Docker image to the registry.
+  - **main.tf** - Terraform configuration for creating the Artifact Registry repository
+
 - Run `gcloud auth activate-service-account --key-file=[KEY_FILE]` to authenticate the service account
 - Run `terraform init` to initialize the Terraform configuration
 - Run `terraform plan` to view the resources that will be created
 - Run `terraform apply` to create the resources
 
-- Create Google Kubernetes Engine cluster (I didn't use Terraform for this step at this time, but feel free to do so)
+
 
 ### 4.2. Step 2: Python Flask Microservice
 
@@ -84,8 +90,6 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 ### 4.3. Step 3: Dockerfile and the docker image
 
-- Create an Artifact Registry repository in GCP and push the Docker image to the registry.
-  - **main.tf** - Terraform configuration for creating the Artifact Registry repository
   - **Dockerfile:** Configuration for building the Docker image
 - Run `gcloud auth configure-docker` to authenticate Docker to the Artifact Registry
 - Run `docker build -t [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG] .` to build and tag the Docker image
