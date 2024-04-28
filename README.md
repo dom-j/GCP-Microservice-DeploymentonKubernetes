@@ -1,4 +1,69 @@
-# GCP-Microservice-DeploymentonKubernetes
+
+# Technical Challenge: Microservice Deployment on Kubernetes with Terraform in GCP
+
+- [Technical Challenge: Microservice Deployment on Kubernetes with Terraform in GCP](#technical-challenge-microservice-deployment-on-kubernetes-with-terraform-in-gcp)
+  - [1. Introduction](#1-introduction)
+  - [2. Architecture diagram](#2-architecture-diagram)
+  - [3. Prerequisites](#3-prerequisites)
+  - [4. Steps:](#4-steps)
+    - [4.1. Step 1: Set up the GCP project](#41-step-1-set-up-the-gcp-project)
+    - [4.2. Step 2: Python Flask Microservice](#42-step-2-python-flask-microservice)
+    - [4.3. Step 3: Dockerfile and the docker image](#43-step-3-dockerfile-and-the-docker-image)
+    - [4.4. Step 4: Kubernetes manifest files](#44-step-4-kubernetes-manifest-files)
+    - [4.5. Step 5: Cloud SQL Auth Proxy](#45-step-5-cloud-sql-auth-proxy)
+    - [4.6. Step 6: Testing and troubleshooting](#46-step-6-testing-and-troubleshooting)
+  
+## 1. Introduction
+
+This project demonstrates deploying a RESTful microservice called 'SampleApp' to a Google Kubernetes Engine (GKE) cluster in GCP. The service retrieves the current date/time from a Cloud SQL database (accessed via Cloud SQL Auth Proxy) and exposes it through a RESTful API. Docker is used for containerization, with the image stored in Artifact Registry. Kubernetes manifests manage deployment, and a load balancer routes incoming traffic.
+
+## 2. Architecture diagram
+
+!
+- **Microservice:** SampleApp
+- **Deployment platform:** Google Kubernetes Engine (GKE)
+- **Database:** Cloud SQL with Cloud SQL Auth Proxy
+- **Containerization:** Docker image stored in Artifact Registry
+- **Deployment configuration:** Kubernetes manifests
+- **Service exposure:** Load balancer
+
+## 3. Prerequisites
+
+**Cloud Resources:**
+
+- [Google Cloud Platform](https://console.cloud.google.com/welcome?project=microservice-on-kubernetes) account and project
+- Service accounts with required permissions
+- Enabled APIs: Cloud SQL Admin API, Kubernetes Engine API, Artifact Registry API, IAM Service Account Credentials API
+- Cloud SQL instance, database, and user (created with Terraform)
+- Artifact Registry for storing the Docker image
+- Google Kubernetes Engine cluster
+- Cloud SQL Auth Proxy for connecting to the Cloud SQL instance from the GKE cluster
+
+**Development Environment:**
+
+- Code editor: [VS Code](https://code.visualstudio.com/download) (optional)
+- [Terraform](https://developer.hashicorp.com/terraform/install) for provisioning infrastructure
+- [Python](https://www.python.org/downloads/windows/) (for building the Flask microservice)
+- [Docker](https://www.docker.com/products/docker-desktop/) for containerization
+
+**Kubernetes Tools:**
+
+- [kubectl](https://kubernetes.io/docs/tasks/tools/) for interacting with the Kubernetes cluster
+
+## 4. Steps:
+
+### 4.1. Step 1: Set up the GCP project
+
+### 4.2. Step 2: Python Flask Microservice
+
+### 4.3. Step 3: Dockerfile and the docker image
+
+### 4.4. Step 4: Kubernetes manifest files
+
+### 4.5. Step 5: Cloud SQL Auth Proxy
+
+### 4.6. Step 6: Testing and troubleshooting
+
 
 1. Set up the GCP project 
 2. Create the service account in GCP
