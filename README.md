@@ -1,17 +1,16 @@
 
-# Technical Challenge: Microservice Deployment on Kubernetes with Terraform in GCP
+# Microservice Deployment on Kubernetes with Terraform in GCP <!-- omit in toc -->
 
-- [Technical Challenge: Microservice Deployment on Kubernetes with Terraform in GCP](#technical-challenge-microservice-deployment-on-kubernetes-with-terraform-in-gcp)
-  - [1. Introduction](#1-introduction)
-  - [2. Architecture diagram](#2-architecture-diagram)
-  - [3. Prerequisites](#3-prerequisites)
-  - [4. Steps:](#4-steps)
-    - [4.1. Step 1: Set up the GCP project](#41-step-1-set-up-the-gcp-project)
-    - [4.2. Step 2: Python Flask Microservice](#42-step-2-python-flask-microservice)
-    - [4.3. Step 3: Dockerfile and the docker image](#43-step-3-dockerfile-and-the-docker-image)
-    - [4.4. Step 4: Kubernetes manifest files](#44-step-4-kubernetes-manifest-files)
-    - [4.5. Step 5: Cloud SQL Auth Proxy](#45-step-5-cloud-sql-auth-proxy)
-    - [4.6. Step 6: Testing and troubleshooting](#46-step-6-testing-and-troubleshooting)
+- [1. Introduction](#1-introduction)
+- [2. Architecture diagram](#2-architecture-diagram)
+- [3. Prerequisites](#3-prerequisites)
+- [4. Steps:](#4-steps)
+  - [4.1. Step 1: Set up the GCP project](#41-step-1-set-up-the-gcp-project)
+  - [4.2. Step 2: Python Flask Microservice](#42-step-2-python-flask-microservice)
+  - [4.3. Step 3: Dockerfile and the docker image](#43-step-3-dockerfile-and-the-docker-image)
+  - [4.4. Step 4: Kubernetes manifest files](#44-step-4-kubernetes-manifest-files)
+  - [4.5. Step 5: Cloud SQL Auth Proxy](#45-step-5-cloud-sql-auth-proxy)
+  - [4.6. Step 6: Testing and troubleshooting](#46-step-6-testing-and-troubleshooting)
   
 ## 1. Introduction
 
