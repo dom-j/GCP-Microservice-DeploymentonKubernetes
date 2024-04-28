@@ -53,7 +53,28 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 ### 4.1. Step 1: Set up the GCP project
 
+- Create a new project in GCP
+- Create a service account with the required permissions (e.g. Storage Admin, Kubernetes Engine Admin, Artifact Registry Admin, Service Account User)
+  -Add a key to the service account and download the JSON file 
+- Enable the necessary APIs: Cloud SQL Admin API, Kubernetes Engine API, Artifact Registry API, IAM Service Account Credentials API
+- Create the Terraform files: 
+    ```
+    provider.tf - GCP provider configuration
+    variables.tf - Input variables for the Terraform configuration
+    main.tf - Terraform configuration for creating the Cloud SQL instance, database, and user
+    terraform.tfvars - Variable values for the Terraform configuration
+    ```
+**NOTE:** Make sure to include sensitive information in your gitignore file and do not expose them in the main code or in GitHub.
+
+- Run `terraform init` to initialize the Terraform configuration
+- Run `terraform plan` to view the resources that will be created
+- Run `terraform apply` to create the Cloud SQL instance, database, and user
+
 ### 4.2. Step 2: Python Flask Microservice
+
+- Build a simple Python Flask microservice (using Terraform) that retrieves the current date/time from a Cloud SQL database
+  
+  - **sample-app.py:** Python Flask code for the microservice 
 
 ### 4.3. Step 3: Dockerfile and the docker image
 
