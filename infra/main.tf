@@ -22,3 +22,26 @@ resource "google_sql_user" "default" {
   password = var.db_pass
   instance = google_sql_database_instance.default.name
 }
+resource "google_artifact_registry_repository" "repository" {
+
+  location = "europe-west2"
+  repository_id = "sample-app-repo"
+  description = "My repository for the Sample App Docker image"
+  format = "DOCKER"
+}
+
+resource "google_container_cluster" "primary" {
+  name     = "sampleapp-autopilot-cluster"
+  location = "europe-west2"
+
+ enable_autopilot = true
+
+  master_auth {
+    username = ""
+    password = ""
+
+    client_certificate_config {
+      issue_client_certificate = false
+    }
+  }
+}

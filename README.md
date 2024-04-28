@@ -71,7 +71,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 - Run `gcloud auth activate-service-account --key-file=[KEY_FILE]` to authenticate the service account
 - Run `terraform init` to initialize the Terraform configuration
 - Run `terraform plan` to view the resources that will be created
-- Run `terraform apply` to create the Cloud SQL instance, database, and user
+- Run `terraform apply` to create the resources
 
 - Create Google Kubernetes Engine cluster (I didn't use Terraform for this step at this time, but feel free to do so)
 
@@ -84,8 +84,8 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 ### 4.3. Step 3: Dockerfile and the docker image
 
-- Create an Artifact Registry repository in GCP and push the Docker image to the registry (I didn't use Terraform for this step at this time, but feel free to do so)
-
+- Create an Artifact Registry repository in GCP and push the Docker image to the registry.
+  - **main.tf** - Terraform configuration for creating the Artifact Registry repository
   - **Dockerfile:** Configuration for building the Docker image
 - Run `gcloud auth configure-docker` to authenticate Docker to the Artifact Registry
 - Run `docker build -t [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG] .` to build and tag the Docker image
