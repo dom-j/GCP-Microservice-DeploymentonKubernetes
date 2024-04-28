@@ -15,6 +15,7 @@
 ## 1. Introduction
 
 This project demonstrates deploying a RESTful microservice called 'SampleApp' to a Google Kubernetes Engine (GKE) cluster in GCP. The service retrieves the current date/time from a Cloud SQL database (accessed via Cloud SQL Auth Proxy) and exposes it through a RESTful API. Docker is used for containerization, with the image stored in Artifact Registry. Kubernetes manifests manage deployment, and a load balancer routes incoming traffic.
+<http://34.89.115.57:80>
 
 ## 2. Architecture diagram
 
