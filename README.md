@@ -32,6 +32,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 - [Google Cloud Platform](https://console.cloud.google.com/welcome?project=microservice-on-kubernetes) account and project
 - Service accounts with required permissions
+- [gcloud CLI](https://cloud.google.com/sdk/docs/install) and SDK installed
 - Enabled APIs: Cloud SQL Admin API, Kubernetes Engine API, Artifact Registry API, IAM Service Account Credentials API
 - Cloud SQL instance, database, and user (created with Terraform)
 - Artifact Registry for storing the Docker image
@@ -66,9 +67,12 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
     ```
 **NOTE:** Make sure to include sensitive information in your gitignore file and do not expose them in the main code or in GitHub.
 
+- Run `gcloud auth activate-service-account --key-file=[KEY_FILE]` to authenticate the service account
 - Run `terraform init` to initialize the Terraform configuration
 - Run `terraform plan` to view the resources that will be created
 - Run `terraform apply` to create the Cloud SQL instance, database, and user
+
+- Create Google Kubernetes Engine cluster (I didn't use Terraform for this step at this time, but feel free to do so)
 
 ### 4.2. Step 2: Python Flask Microservice
 
@@ -79,15 +83,36 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 ### 4.3. Step 3: Dockerfile and the docker image
 
-- Create an Artifact Registry repository in GCP and push the Docker image to the registry
+- Create an Artifact Registry repository in GCP and push the Docker image to the registry (I didn't use Terraform for this step at this time, but feel free to do so)
 
   - **Dockerfile:** Configuration for building the Docker image
+- Run `gcloud auth configure-docker` to authenticate Docker to the Artifact Registry
 - Run `docker build -t [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG] .` to build and tag the Docker image
 - Run `docker push [HOSTNAME]/[PROJECT-ID]/[REPOSITORY]/[IMAGE]:[TAG]` to push the Docker image to the Artifact Registry
 
 ### 4.4. Step 4: Kubernetes manifest files
 
+- Create the Kubernetes manifest files for the deployment, service, and Kubernetes service account (KSA)
+
+  - **deployment.yaml:** Deployment configuration for the microservice
+  - **service.yaml:** Service configuration for exposing the microservice
+  - **ksa.yaml:** Kubernetes service account configuration for the microservice
+-Run `gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE] --project [PROJECT_ID]` to authenticate kubectl to the GKE cluster
+- Run `kubectl apply -f kubernetes-deployment-manifest.yaml` to deploy the microservice
+- Run `kubectl apply -f kubernetes-loadbalancer.yaml` to expose the microservice (I use LoadBalancer)
+- Run `kubectl apply -f kubernetes-service-account.yaml` to create the Kubernetes service account
+
+- Kubernetes secrets: 
+
+ -Run `kubectl create secret generic db-credentials --from-literal=username=[USERNAME] --from-literal=password=[PASSWORD]` to create the Kubernetes secrets
+
 ### 4.5. Step 5: Cloud SQL Auth Proxy
+
+- The Cloud SQL Auth Proxy is a Cloud SQL connector that provides secure access to your instances without a need for Authorized networks or for configuring SSL.
+
+  - **cloudsql-instance-connection-name:** Connection name for the Cloud SQL instance
+  - **cloudsql-db-credentials:** Database user credentials
+  - **cloudsql-proxy.yaml:** Configuration for the Cloud SQL Auth Proxy
 
 ### 4.6. Step 6: Testing and troubleshooting
 
