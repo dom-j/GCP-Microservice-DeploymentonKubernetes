@@ -99,9 +99,9 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 - Create the Kubernetes manifest files for the deployment, service, and Kubernetes service account (KSA)
 
-  - **deployment.yaml:** Deployment configuration for the microservice
-  - **service.yaml:** Service configuration for exposing the microservice
-  - **ksa.yaml:** Kubernetes service account configuration for the microservice
+  - **kubernetes-deployment-manifest.yaml:** Deployment configuration for the microservice
+  - **kubernetes-loadbalancer.yaml:** Service configuration for exposing the microservice
+  - **kubernetes-service-account.yaml:** Kubernetes service account configuration for the microservice
 -Run `gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE] --project [PROJECT_ID]` to authenticate kubectl to the GKE cluster
 - Run `kubectl apply -f kubernetes-deployment-manifest.yaml` to deploy the microservice
 - Run `kubectl apply -f kubernetes-loadbalancer.yaml` to expose the microservice (I use LoadBalancer)
