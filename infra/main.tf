@@ -43,10 +43,3 @@ resource "google_artifact_registry_repository" "repository" {
     }
       }
     }
-  
-# Bind the Kubernetes service account to the Google Cloud service account
-resource "google_service_account_iam_binding" "workload_identity" {
-  service_account_id = google_service_account.gke_connection[var.gke_connection].name
-  role               = "roles/iam.workloadIdentityUser"
-  members            = ["serviceAccount:${var.gcp_project}.svc.id.goog[default/${var.ksa}]"]
-}
