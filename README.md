@@ -19,7 +19,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 ## 2. Architecture diagram
 
-!
+![Architecture Diagram](/assets/architecture-diagram.png)
 - **Microservice:** SampleApp
 - **Deployment platform:** Google Kubernetes Engine (GKE)
 - **Database:** Cloud SQL with Cloud SQL Auth Proxy
