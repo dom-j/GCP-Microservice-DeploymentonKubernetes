@@ -107,7 +107,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 - Run `kubectl apply -f kubernetes-loadbalancer.yaml` to expose the microservice (I use LoadBalancer)
 - Run `kubectl apply -f kubernetes-service-account.yaml` to create the Kubernetes service account
 
-- Kubernetes secrets: 
+- Kubernetes secrets:
 
  -Run `kubectl create secret generic db-credentials --from-literal=username=[USERNAME] --from-literal=password=[PASSWORD]` to create the Kubernetes secrets
 
@@ -115,14 +115,10 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 
 - The Cloud SQL Auth Proxy is a Cloud SQL connector that provides secure access to your instances without a need for Authorized networks or for configuring SSL.When you connect using the Cloud SQL Auth Proxy, the Cloud SQL Auth Proxy is added to your pod using the sidecar container pattern. The Cloud SQL Auth Proxy container is in the same pod as your application, which enables the application to connect to the Cloud SQL Auth Proxy using localhost, increasing security and performance.
 
-I used the method **Workload Identity** to bind a KSA to a GSA, causing any deployments with that KSA to authenticate as the GSA in their interactions with Google Cloud.
+I used the method **Workload Identity** to bind a KSA to a GSA, causing any deployments with that KSA to authenticate as the GSA in their interactions with Google Cloud. GKE Autopilot cluster has Workload Identity enabled by default.
 
 - Create a Google service account (GSA) with the required permissions (e.g. Cloud SQL Client)
-1. Enable Workload Identity for the cluster and the IAM binding by running the following command:
-```
-gcloud container clusters update [CLUSTER_NAME] --location=[LOCATION] --workload-pool=[PROJECT_ID].svc.id.goog
-gcloud iam service-accounts add-iam-policy-binding --role="roles/iam.workloadIdentityUser" --member="serviceAccount:[YOUR-GOOGLE-CLOUD-PROJECT].svc.id.goog[YOUR-K8S-NAMESPACE/YOUR-KSA-NAME]" [YOUR-GSA-NAME]@[YOUR-GOOGLE-CLOUD-PROJECT].iam.gserviceaccount.com
-```
+- Bind the KSA to the GSA (in Terraform)
 
 ### 4.6. Step 6: Testing and troubleshooting
 
