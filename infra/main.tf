@@ -27,14 +27,14 @@ resource "google_sql_user" "default" {
 resource "google_artifact_registry_repository" "repository" {
 
   location = "europe-west2"
-  repository_id = "sample-app-repo-test"
-  description = "My test repository for the Sample App Docker image"
+  repository_id = "sample-app-repo"
+  description = "It stores my sample-app docker image"
   format = "DOCKER"
 }
 
 # Create the Google Kubernetes Engine cluster
-    resource "google_container_cluster" "primary" {
-      name     = "sampleapp-autopilot-cluster-test"
+resource "google_container_cluster" "primary" {
+      name     = "sampleapp-autopilot-cluster"
       location = "europe-west2"
       enable_autopilot = true 
     master_auth {  
@@ -43,3 +43,16 @@ resource "google_artifact_registry_repository" "repository" {
     }
       }
     }
+
+resource "kubernetes_secret" "default" {
+  metadata {
+    name = "db-credentials"
+  }
+
+  data = {
+    username = base64encode(var.db_user)
+    password = base64encode(var.db_pass)
+  }
+
+  type = "Opaque"
+}

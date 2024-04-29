@@ -19,12 +19,3 @@ variable "db_pass" {
   type = string
   sensitive = true
   }
-
-  variable "gke_connection"{
-    description = "The service account email address for the GKE connection"
-    type = string
-  }
-  variable "ksa"{
-    description = "The Kubernetes service account name"
-    type = string
-  }
