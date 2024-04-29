@@ -23,7 +23,8 @@ resource "google_sql_user" "default" {
   instance = google_sql_database_instance.default.name
 }
 
-# Create the Artifact Registry repository
+
+# Create the Artifact Registry repository to store the Docker image
 resource "google_artifact_registry_repository" "repository" {
 
   location = "europe-west2"
@@ -32,7 +33,7 @@ resource "google_artifact_registry_repository" "repository" {
   format = "DOCKER"
 }
 
-# Create the Google Kubernetes Engine cluster
+# Create the Google Kubernetes Engine cluster for my Sample App
 resource "google_container_cluster" "primary" {
       name     = "sampleapp-autopilot-cluster"
       location = "europe-west2"
@@ -44,6 +45,7 @@ resource "google_container_cluster" "primary" {
       }
     }
 
+# Create the Kubernetes secret for the Cloud SQL database credentials
 resource "kubernetes_secret" "default" {
   metadata {
     name = "db-credentials"

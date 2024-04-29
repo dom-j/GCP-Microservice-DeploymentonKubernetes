@@ -14,7 +14,7 @@
   
 ## 1. Introduction
 
-This project demonstrates deploying a RESTful microservice called 'SampleApp' to a Google Kubernetes Engine (GKE) cluster in GCP. The service retrieves the current date/time from a Cloud SQL database (accessed via Cloud SQL Auth Proxy) and exposes it through a RESTful API. Docker is used for containerization, with the image stored in Artifact Registry. Kubernetes manifests manage deployment, and a load balancer routes incoming traffic.
+This project demonstrates deploying a RESTful microservice called 'SampleApp' to a Google Kubernetes Engine (GKE) cluster in GCP. The service retrieves the current date/time from a Cloud SQL database (accessed via Cloud SQL Auth Proxy) and exposes it through a RESTful API. I used Terraform to provision GCP resources. Docker is used for containerization, with the image stored in Artifact Registry. Kubernetes manifests manage deployment, and a load balancer routes incoming traffic.
 <http://34.89.115.57:80>
 
 ## 2. Architecture diagram
@@ -35,7 +35,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 - Service accounts with required permissions
 - [gcloud CLI](https://cloud.google.com/sdk/docs/install) and SDK installed
 - Enabled APIs: Cloud SQL Admin API, Kubernetes Engine API, Artifact Registry API, IAM Service Account Credentials API
-- Cloud SQL instance, database, and user (created with Terraform)
+- Cloud SQL instance, database, and user
 - Artifact Registry for storing the Docker image
 - Google Kubernetes Engine cluster
 - Cloud SQL Auth Proxy for connecting to the Cloud SQL instance from the GKE cluster
@@ -107,9 +107,8 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 - Run `kubectl apply -f kubernetes-loadbalancer.yaml` to expose the microservice (I use LoadBalancer)
 - Run `kubectl apply -f kubernetes-service-account.yaml` to create the Kubernetes service account
 
-- Kubernetes secrets:
-
- -Run `kubectl create secret generic db-credentials --from-literal=username=[USERNAME] --from-literal=password=[PASSWORD]` to create the Kubernetes secrets
+- Kubernetes secrets(to store the Cloud SQL credentials):
+  - **main.tf:** Terraform configuration for creating the Kubernetes secret
 
 ### 4.5. Step 5: Cloud SQL Auth Proxy
 
@@ -118,7 +117,13 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 I used the method **Workload Identity** to bind a KSA to a GSA, causing any deployments with that KSA to authenticate as the GSA in their interactions with Google Cloud. GKE Autopilot cluster has Workload Identity enabled by default.
 
 - Create a Google service account (GSA) with the required permissions (e.g. Cloud SQL Client)
-- Bind the KSA to the GSA (in Terraform)
+- Bind the KSA to the GSA by this command:
+  ```
+  gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:[PROJECT_ID].svc.id.goog[NAMESPACE]/[KSA_NAME]" \
+  [GSA_EMAIL]
+  ```
 
 ### 4.6. Step 6: Testing and troubleshooting
 
