@@ -102,7 +102,8 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
   - **kubernetes-deployment-manifest.yaml:** Deployment configuration for the microservice
   - **kubernetes-loadbalancer.yaml:** Service configuration for exposing the microservice
   - **kubernetes-service-account.yaml:** Kubernetes service account configuration for the microservice
--Run `gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE] --project [PROJECT_ID]` to authenticate kubectl to the GKE cluster
+
+- Run `gcloud container clusters get-credentials [CLUSTER_NAME] --zone [ZONE] --project [PROJECT_ID]` to authenticate kubectl to the GKE cluster
 - Run `kubectl apply -f kubernetes-deployment-manifest.yaml` to deploy the microservice
 - Run `kubectl apply -f kubernetes-loadbalancer.yaml` to expose the microservice (I use LoadBalancer)
 - Run `kubectl apply -f kubernetes-service-account.yaml` to create the Kubernetes service account
@@ -117,7 +118,7 @@ This project demonstrates deploying a RESTful microservice called 'SampleApp' to
 I used the method **Workload Identity** to bind a KSA to a GSA, causing any deployments with that KSA to authenticate as the GSA in their interactions with Google Cloud. GKE Autopilot cluster has Workload Identity enabled by default.
 
 - Create a Google service account (GSA) with the required permissions (e.g. Cloud SQL Client)
-- Bind the KSA to the GSA by this command:
+- Bind the KSA to the GSA by this command: (so that the KSA can authenticate as the GSA with Google Cloud)
   ```
   gcloud iam service-accounts add-iam-policy-binding \
   --role roles/iam.workloadIdentityUser \
