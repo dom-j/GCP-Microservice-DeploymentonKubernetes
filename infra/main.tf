@@ -44,7 +44,7 @@ resource "google_container_cluster" "primary" {
       }
     }
       }
-    }
+    
 
 # Create the Kubernetes secret for the Cloud SQL database credentials
 resource "kubernetes_secret" "default" {
