@@ -15,7 +15,7 @@
 ## 1. Introduction
 
 This project demonstrates deploying a RESTful microservice called 'SampleApp' to a Google Kubernetes Engine (GKE) cluster in GCP. The service retrieves the current date/time from a Cloud SQL database (accessed via Cloud SQL Auth Proxy). I used Terraform to provision GCP resources. Docker is used for containerization, with the image stored in Artifact Registry. Kubernetes manifests manage deployment, and a load balancer routes incoming traffic.
-<http://34.89.115.57:80>
+
 
 ## 2. Architecture diagram
 
@@ -130,7 +130,7 @@ I used the method **Workload Identity** to bind a KSA to a GSA, causing any depl
 
 - Test the Kubernetes deployment and the pods by running `kubectl get deployments` and `kubectl get pods`.
 - Test the microservice by sending a GET request to the load balancer IP address
-  - `curl <http://34.89.115.57:80>`  run this command in the terminal
-  - <http://34.89.115.57:80>       enter this in the browser
-  - GET http://34.89.115.57:80 send this request in Postman
+  - `curl <EXTERNAL IP ADDRESS>`  run this command in the terminal
+  - <http://EXTERNAL IP ADDRESS>       enter this in the browser
+  - GET http://EXTERNAL IP ADDRESS send this request in Postman
   
